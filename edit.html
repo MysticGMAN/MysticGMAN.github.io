@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Contact</title>
+    <title>Edit Contact</title>
     <link rel="icon" class="fa-solid fa-skull">
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/all.css">
@@ -17,7 +17,7 @@
     <header>
             <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-dark bg-dark">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="index.html"><i class="fa-solid fa-skull fa-spin" style="--fa-animation-duration: 90s;"></i> WEBD-6201 - Contact</a>
+                    <a class="navbar-brand" href="index.html"><i class="fa-solid fa-skull fa-spin" style="--fa-animation-duration: 90s;"></i> WEBD-6201 - Edit Contact</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -36,7 +36,7 @@
                                 <a class="nav-link" href="about.html"><i class="fa-solid fa-circle-user"></i> About Us</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="contact.html"><i class="fa-solid fa-phone"></i> Contact Us</a>
+                                <a class="nav-link" aria-current="page" href="contact.html"><i class="fa-solid fa-phone"></i> Contact Us</a>
                             </li>
                         </ul>
                     </div>
@@ -44,42 +44,39 @@
         </nav>
     </header>
     <main class="container text-center">
-    <h3>Welcome to Contact Us</h3>
-        <p>Please try turning it on and off again before reaching out... Please.</p>
+    <h3>Edit Contact Page</h3>
+        <p>What do you think you're doing.</p>
 
 
 
         <div class="container justify-content-center col-md-7 ps-4 pe-4">
             <form>
-                <h5><i class="fa-solid fa-pen-nib fa-xl"></i> Drop Us a Message</h5>
+                <h5><i class="fa-solid fa-pen-nib"></i> Edit Contact</h5>
                         <div class="input-group mb-3">
-                            <input id="Name" name="Name" type="text" class="form-control" placeholder="Full Name *" required/>
+                            <input id="name" name="Name" type="text" class="form-control" placeholder="Full Name *" required/>
                         </div>
-                        <div class="input-group">
+                        <div class="input-group mb-3">
                             <input id="emailAddress" name="emailAddress" type="email" class="form-control" placeholder="Email Address *" required/>
                         </div>
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                        <div class="input-group">
+<!--                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                        <div class="input-group mb-3">
                             <input id="phoneNum" name="phoneNum" type="tel" class="form-control" placeholder="Telephone Number *" />
                         </div>
-                            <small id="phoneHelp" class="form-text text-muted">Your phone number however... it's open season.</small>
-                        <div class="input-group mb-3">
-                            <textarea id="userMsg" class="form-control" name="userMsg" placeholder="Your Message *" style="width: 100%; height: 150px;"></textarea>
-                        </div>
-                        <div class="form-check mb-3">
-                            <input id="subscribeCheckbox" name="subscribeCheckbox" type="checkbox" class="form-check-input"/>
-                            <label class="form-check-label" for="subscribeCheckbox">Subscribe to our contact list </label>
-                        </div>
+<!--                            <small id="phoneHelp" class="form-text text-muted">Your phone number however... it's open season.</small>-->
+<!--                        <div class="input-group mb-3">-->
+<!--                            <textarea id="userMsg" class="form-control" name="userMsg" placeholder="Your Message *" style="width: 100%; height: 150px;"></textarea>-->
+<!--                        </div>-->
+<!--                        <div class="form-check mb-3">-->
+<!--                            <input id="subscribeCheckbox" name="subscribeCheckbox" type="checkbox" class="form-check-input"/>-->
+<!--                            <label class="form-check-label" for="subscribeCheckbox">Subscribe to our contact list </label>-->
+<!--                        </div>-->
                         <div class="input-group row-cols-2 mb-2">
 
-                            <button id="btnSend" name="btnSend" type="submit" class="btn btn-primary btn-dark"><i class="fa-solid fa-envelope"></i> Send Message</button>
+                            <button id="btnEdit" name="btnSend" type="submit" class="btn btn-primary btn-dark"><i class="fa-solid fa-pen-to-square"></i> Edit Contact</button>
 
                             <button id="btnReset" name="btnReset" type="reset" class="btn btn-secondary btn-dark"><i class="fa-solid fa-rectangle-xmark"></i> Cancel</button>
                         </div>
             </form>
-            <div>
-                <a href="contact-list.html" class="btn btn-primary btn-dark btn-sm"><i class="fa-solid fa-list"></i> Contact List</a>
-            </div>
         </div>
     </main>
 
