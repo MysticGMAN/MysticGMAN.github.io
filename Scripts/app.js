@@ -1,23 +1,21 @@
 "use strict";
 
-
-
 //IIFE - Immediately Invoked Function Expression
 (function(){
-
-
-
     function Start()
     {
         console.log("App Started")
+
+        AjaxRequest("GET", "header.html", LoadHeader);
+
         switch(document.title){
             case "Home":
                 DisplayHomePage();
                 break;
-            case "About":
+            case "About Us":
                 DisplayAboutPage();
                 break;
-            case "Contact":
+            case "Contact Us":
                 DisplayContactPage();
                 break;
             case "ContactList":
@@ -32,14 +30,47 @@
             case "Edit Contact":
                 DisplayEditContact();
                 break;
+            case "Login":
+                DisplayLoginPage();
+                break;
+            case "Register":
+                DisplayRegisterPage();
+                break;
 
         }
     }
     window.addEventListener("load", Start);
     //if(document.title === "Contact"){DisplayContactPage();}
-    window.addEventListener("load", Debugging);
+    //window.addEventListener("load", Debugging);
 })();
 
+function AjaxRequest(method, url, callback){
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.addEventListener("readystatechange", () => {
+
+        if (xhr.readyState === 4 && xhr.status === 200){
+
+            if (typeof callback === "function") {
+                callback(xhr.responseText);
+                console.log(xhr.responseText);
+            }else{
+                console.error("Error: callback is not a valid function");
+            }
+        }
+    });
+
+    xhr.open(method, url);
+    xhr.send();
+}
+
+function LoadHeader(html_data){
+
+    $("header").html(html_data);
+    $(`li>a:contains(${document.title})`).addClass("active");
+    //$("a.navbar-brand").()
+}
 
 function AddContact(fullName, contactNumber, emailAddress){
     let contactInfo = new core.Contact(fullName.value, contactNumber.value, emailAddress.value);
@@ -53,10 +84,10 @@ function AddContact(fullName, contactNumber, emailAddress){
 //Function that listens for the click of the About Us button on the index.html page
 function DisplayHomePage(){
 
-
+    console.log("Home page loaded");
 
     $("main").append(`<p id="MainParagraph" class="mt-3">
-        This is the no fun dynamic zone. CSS animations sold separately</p>`);
+    This is the no fun dynamic zone. CSS animations sold separately</p>`);
 
     let MainParagraph =  document.getElementById("MainParagraph");
 
@@ -72,9 +103,6 @@ function DisplayHomePage(){
     $("body").append(`<article class="container"><p id="ArticleParagraph" class="mt-3">
         This is my article paragraph
         </p></article>`);
-
-
-
 
     let ContactUsBtn = document.getElementById("ContactUsBtn");
     let ServicesBtn = document.getElementById("ServicesBtn");
@@ -106,25 +134,25 @@ function DisplayHomePage(){
     });
 }
 
-function Debugging (){
-
-    if (document.title === "About") {
-        console.log("About Us page Loaded");
-    } else if (document.title === "Contact") {
-        console.log("Contact Us page Loaded");
-    } else if (document.title === "Contact List") {
-        console.log("Contact List Page Loaded");
-    } else if (document.title === "Home") {
-        console.log("Index/Home Page Loaded");
-    } else if (document.title === "Products") {
-        console.log("Products page Loaded");
-    } else if (document.title === "Services") {
-        console.log("Services page Loaded");
-    }else if (document.title === "Edit Contact") {
-        console.log("Edit page Loaded");
-    }
-
-}
+// function Debugging (){
+//
+//     if (document.title === "About") {
+//         console.log("About Us page Loaded");
+//     } else if (document.title === "Contact") {
+//         console.log("Contact Us page Loaded");
+//     } else if (document.title === "Contact List") {
+//         console.log("Contact List Page Loaded");
+//     } else if (document.title === "Home") {
+//         console.log("Index/Home Page Loaded");
+//     } else if (document.title === "Products") {
+//         console.log("Products page Loaded");
+//     } else if (document.title === "Services") {
+//         console.log("Services page Loaded");
+//     }else if (document.title === "Edit Contact") {
+//         console.log("Edit page Loaded");
+//     }
+//
+// }
 
 function DisplayContactListPage() {
 
@@ -179,12 +207,86 @@ function DisplayContactListPage() {
 
     }
 
+}
 
+// function TestName() {
+//     console.log("Test Name Function");
+//
+//     let messageArea = $("#messageArea");
+//
+//     let nameRegex = /^+([A-Z][a-z]{1,3}\.?\s)?([A-Z][a-z]+)+([\s, -]([A-Z][a-z]+))*$/;
+//
+//     $("#name").on("blur", function(){
+//
+//         let name = $(this).val();
+//         if(!nameRegex.test(name)){
+//             //fail validation
+//             $(this).trigger("focus"); //return user back to name input box
+//             $(this).trigger("select"); //highlight all the text in the text box
+//             messageArea.addClass("alert alert-danger");
+//             messageArea.text("Please enter a valid First and Last name (FirstName [MiddleName] LastName)");
+//             messageArea.show();
+//         }else {
+//             //pass validation
+//             // messageArea.removeClass("alert-danger").addClass("alert-success").text(
+//             //     "Succes");
+//             messageArea.removeClass("alert-danger");
+//            
+//             messageArea.hide();
+//            
+//         }
+//     });
+// }
 
+/**
+ * A function to validate the text on the form that is a part of the contact.html page
+ * @param {string} input_field_id Takes in the html element id
+ * @param {RegExp} reg_expr Takes in a Regex Expression
+ * @param {string} err_msg An error message to be displayed
+ * @constructor 
+ */
+function ValidateField(input_field_id, reg_expr, err_msg) {
+    console.log("Test Name Function");
+
+    let messageArea = $("#messageArea");
+
+    //let nameRegex = /^+([A-Z][a-z]{1,3}\.?\s)?([A-Z][a-z]+)+([\s, -]([A-Z][a-z]+))*$/;
+
+    $(input_field_id).on("blur", function(){
+
+        let name = $(this).val();
+        if(!reg_expr.test(name)){
+            //fail validation
+            $(this).trigger("focus").trigger("select"); 
+            messageArea.addClass("alert alert-danger").text(err_msg).show();
+        }else {
+            //pass validation
+            // messageArea.removeClass("alert-danger").addClass("alert-success").text(
+            //     "Succes");
+            messageArea.removeAttr("class").hide();
+
+        }
+    });
+}
+
+function ValidateContactForm(){
+    new ValidateField("#Name",
+        /^([A-Z][a-z]{1,3}\.?\s)?([A-Z][a-z]+)+([\s,-]([A-z][a-z]+))*$/,
+        "Please enter a valid name (Firstname Lastname)");
+    new ValidateField("#emailAdrress",
+        /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,10}$/,
+        "Please enter a valid Email Address");
+    new ValidateField("#phoneNum",
+        /^(\+\d{1,3}[\s-.])?\(?\d{3}\)?[\s-.]?\d{3}[\s-.]\d{4}$/,
+        "Please enter a valid Phone number (000-000-0000)");
 }
 
 function DisplayContactPage() {
     console.log("i am in DisplayContactPage function");
+
+    ValidateContactForm();
+
+
     let sendButton = document.getElementById("btnSend");
     let subscribeCheckBox = document.getElementById("subscribeCheckbox");
     let fullName = document.getElementById("Name");
@@ -221,9 +323,68 @@ function DisplayServicesPage() {
 
 }
 
+function DisplayLoginPage() {
+    console.log("login page loaded");
+
+    let messageArea = $("#messageArea");
+    messageArea.hide();
+
+    $("#loginButton").on("click", function(){
+        let success = false;
+        let newUser = new core.User();
+
+        $.get("../data/user.json", function(data){
+
+            for(const u of data.user){
+                if(username.value === u.Username && password.value === u.Password){
+                    newUser.fromJSON(user);
+                    break;
+                }
+            }
+
+            if(success){
+
+                sessionStorage.setItem("user", newUser.serialize());
+                messageArea.removeAttr("class").hide();
+
+            }else{
+                $("#username").trigger("focus").trigger("select");
+                messageArea.addClass("alert alert-danger")
+                    .text("Error: Invalid Credentials");
+            }
+        });
+
+        $("#cancelButton").on("click", function() {
+
+            document.forms[0].reset();
+            location.href = "index.html";
+
+        });
+
+    });
+}
+
+function CheckLogin() {
+
+    if(sessionStorage.getItem("user")){
+        $("#login").html(`<a id="logout" class="nav-link" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>`)
+    }
+
+    $("#logout").on("click", function(){
+        sessionStorage.clear();
+        location.href = "login.html";
+    })
+}
+
+function DisplayRegisterPage() {
+
+}
+
 function DisplayEditContact() {
 
     console.log("Edit page function accessed");
+
+    ValidateContactForm();
 
     let page = location.hash.substring(1);
     switch(page){
